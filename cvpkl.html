@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV PKL – Rekayasa Perangkat Lunak</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:    #0e0e0e;
+    --paper:  #f5f2ec;
+    --accent: #1a4fff;
+    --muted:  #6b6b6b;
+    --line:   #d4cfc4;
+    --tag-bg: #e8e4fb;
+    --tag-fg: #3a2fc9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    box-shadow: 6px 6px 0 var(--line);
+    animation: fadeUp .5s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── HEADER ─────────────────────────────── */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+    align-items: start;
+    padding: 2.4rem 2.8rem 2rem;
+    border-bottom: 1.5px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: .06;
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: .6rem;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    margin-bottom: .3rem;
+  }
+
+  .tagline {
+    font-size: .95rem;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .contacts {
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+    text-align: right;
+    padding-top: 1rem;
+  }
+
+  .contacts a, .contacts span {
+    font-size: .82rem;
+    color: var(--muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+    justify-content: flex-end;
+  }
+
+  .contacts a:hover { color: var(--accent); }
+
+  .ico {
+    width: 14px; height: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  /* ── BODY ────────────────────────────────── */
+  .body {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+  }
+
+  .main { padding: 2rem 2.4rem; border-right: 1.5px solid var(--line); }
+  .side { padding: 2rem 1.8rem; }
+
+  /* ── SECTION ─────────────────────────────── */
+  .section { margin-bottom: 2rem; }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .75rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* ── OBJECTIVE ───────────────────────────── */
+  .objective {
+    font-size: .9rem;
+    color: var(--ink);
+    line-height: 1.75;
+    padding: 1rem 1.2rem;
+    border-left: 3px solid var(--accent);
+    background: #f7f9ff;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ── EXPERIENCE / EDU CARD ───────────────── */
+  .card { margin-bottom: 1.25rem; }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: .3rem;
+  }
+
+  .card-title {
+    font-weight: 600;
+    font-size: .92rem;
+  }
+
+  .card-meta {
+    font-size: .78rem;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+
+  .card-sub {
+    font-size: .83rem;
+    color: var(--accent);
+    margin-bottom: .4rem;
+  }
+
+  .card ul {
+    padding-left: 1.1rem;
+    font-size: .85rem;
+    color: #333;
+  }
+
+  .card ul li { margin-bottom: .2rem; }
+
+  /* ── PROJECT CARD ────────────────────────── */
+  .proj {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: .9rem 1rem;
+    margin-bottom: .9rem;
+    transition: box-shadow .2s, transform .2s;
+  }
+
+  .proj:hover {
+    box-shadow: 3px 3px 0 var(--accent);
+    transform: translate(-1px, -1px);
+  }
+
+  .proj-title {
+    font-weight: 600;
+    font-size: .9rem;
+    margin-bottom: .3rem;
+  }
+
+  .proj-desc {
+    font-size: .82rem;
+    color: var(--muted);
+    margin-bottom: .5rem;
+  }
+
+  /* ── TAGS ────────────────────────────────── */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+  }
+
+  .tag {
+    font-size: .72rem;
+    font-family: 'Space Mono', monospace;
+    background: var(--tag-bg);
+    color: var(--tag-fg);
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: .04em;
+  }
+
+  .tag.dark {
+    background: var(--ink);
+    color: #fff;
+  }
+
+  /* ── SKILL BARS ──────────────────────────── */
+  .skill-item { margin-bottom: .85rem; }
+
+  .skill-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: .83rem;
+    margin-bottom: .3rem;
+  }
+
+  .skill-pct { color: var(--muted); font-size: .75rem; font-family: 'Space Mono', monospace; }
+
+  .bar-track {
+    height: 4px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transform-origin: left;
+    animation: barGrow .8s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  @keyframes barGrow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  /* ── SIDE ITEMS ──────────────────────────── */
+  .side-item {
+    display: flex;
+    align-items: flex-start;
+    gap: .6rem;
+    margin-bottom: .8rem;
+    font-size: .85rem;
+  }
+
+  .side-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  /* ── ACHIEVEMENT ─────────────────────────── */
+  .ach {
+    display: flex;
+    align-items: flex-start;
+    gap: .6rem;
+    margin-bottom: .7rem;
+    font-size: .85rem;
+  }
+
+  .ach-num {
+    font-family: 'Space Mono', monospace;
+    font-size: .75rem;
+    background: var(--accent);
+    color: #fff;
+    padding: 1px 6px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── FOOTER ──────────────────────────────── */
+  .footer {
+    border-top: 1.5px solid var(--line);
+    padding: .9rem 2.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .75rem;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* ── PRINT ───────────────────────────────── */
+  @media print {
+    body { padding: 0; background: #fff; }
+    .page { box-shadow: none; border: none; }
+    .proj:hover { box-shadow: none; transform: none; }
+  }
+
+  @media (max-width: 640px) {
+    .body { grid-template-columns: 1fr; }
+    .main { border-right: none; border-bottom: 1.5px solid var(--line); }
+    h1 { font-size: 1.8rem; }
+    .header { grid-template-columns: 1fr; }
+    .contacts { text-align: left; }
+    .contacts a, .contacts span { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <span class="badge">CV PKL · 2025</span>
+      <h1>Nafian Akbar Abimanyu</h1>
+      <p class="tagline">Siswa SMK · Rekayasa Perangkat Lunak · Kelas XI</p>
+    </div>
+    <div class="contacts">
+      <span><span class="ico">📍</span> Yogyakarta, Indonesia</span>
+      <a href="tel:+6282286080440"><span class="ico">📞</span> +62 822-8608-0440</a>
+      <a href="mailto:arkafian28@email.com"><span class="ico">✉</span> Arkafian28@email.com</a>
+      <a href="https://github.com/nafianakbar" target="_blank"><span class="ico">⌥</span> https://github.com/nafianakbar</a>
+    </div>
+  </header>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- MAIN COLUMN -->
+    <main class="main">
+
+      <!-- TUJUAN -->
+      <section class="section">
+        <div class="section-label">Tujuan PKL</div>
+        <p class="objective">
+          Siswa SMK kelas XI jurusan Rekayasa Perangkat Lunak dengan semangat belajar tinggi dan
+          pengalaman membangun proyek nyata. Ingin berkontribusi pada tim profesional selama PKL
+          untuk mengasah skill <em>web development</em> dan pemrograman berbasis industri.
+        </p>
+      </section>
+
+      <!-- PROYEK -->
+      <section class="section">
+        <div class="section-label">Proyek Unggulan</div>
+
+        <div class="proj">
+          <div class="proj-title">📦 Sistem Inventaris Sekolah</div>
+          <div class="proj-desc">Aplikasi web untuk manajemen barang & peminjaman aset sekolah. Dibuat sebagai proyek akhir kelas XI.</div>
+          <div class="tags">
+            <span class="tag">PHP</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Bootstrap 5</span>
+            <span class="tag">CRUD</span>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="proj-title">🛒 Toko Online Mini</div>
+          <div class="proj-desc">Platform e-commerce sederhana dengan fitur keranjang belanja, autentikasi pengguna, dan dashboard admin.</div>
+          <div class="tags">
+            <span class="tag">Laravel</span>
+            <span class="tag">Tailwind CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">REST API</span>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="proj-title">📊 Dashboard Nilai Siswa</div>
+          <div class="proj-desc">Aplikasi monitoring nilai dengan grafik interaktif. Guru dapat input nilai, siswa bisa melihat rekap real-time.</div>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Flask</span>
+            <span class="tag">Chart.js</span>
+            <span class="tag">SQLite</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PENDIDIKAN -->
+      <section class="section">
+        <div class="section-label">Pendidikan</div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">SMK Negeri 1 Sanden</span>
+            <span class="card-meta">2024 – Sekarang</span>
+          </div>
+          <div class="card-sub">Rekayasa Perangkat Lunak · Kelas XI</div>
+          <ul>
+            <li>Rata-rata nilai rapor: <strong>87.4</strong> / 100</li>
+            <li>Ketua kelompok PKK (Praktik Kerja Kejuruan) angkatan 2024</li>
+            <li>Aktif dalam ekstrakurikuler Programming Club</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">SMP Negeri 7 Tanjung Pinang</span>
+            <span class="card-meta">2021 – 2024</span>
+          </div>
+          <div class="card-sub">Lulus dengan predikat baik</div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- SIDE COLUMN -->
+    <aside class="side">
+
+      <!-- SKILLS -->
+      <section class="section">
+        <div class="section-label">Keahlian Teknis</div>
+
+        <div class="skill-item">
+          <div class="skill-row"><span>HTML & CSS</span><span class="skill-pct">90%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:90%; animation-delay:.1s"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row"><span>PHP / Laravel</span><span class="skill-pct">85%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:75%; animation-delay:.2s"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row"><span>JavaScript</span><span class="skill-pct">70%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:70%; animation-delay:.3s"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row"><span>Python</span><span class="skill-pct">65%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:65%; animation-delay:.4s"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row"><span>MySQL / Database</span><span class="skill-pct">72%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:72%; animation-delay:.5s"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row"><span>Git & GitHub</span><span class="skill-pct">68%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:68%; animation-delay:.6s"></div></div>
+        </div>
+      </section>
+
+      <!-- TOOLS -->
+      <section class="section">
+        <div class="section-label">Tools</div>
+        <div class="tags" style="gap:.4rem">
+          <span class="tag dark">VS Code</span>
+          <span class="tag dark">Git</span>
+          <span class="tag dark">Figma</span>
+          <span class="tag dark">Postman</span>
+          <span class="tag dark">XAMPP</span>
+          <span class="tag dark">Linux</span>
+          <span class="tag dark">Docker</span>
+        </div>
+      </section>
+
+      <!-- SOFT SKILLS -->
+      <section class="section">
+        <div class="section-label">Soft Skills</div>
+        <div class="side-item"><div class="side-dot"></div><div>Kerja tim & kolaborasi</div></div>
+        <div class="side-item"><div class="side-dot"></div><div>Cepat belajar hal baru</div></div>
+        <div class="side-item"><div class="side-dot"></div><div>Problem solving & debugging</div></div>
+        <div class="side-item"><div class="side-dot"></div><div>Komunikasi yang baik</div></div>
+        <div class="side-item"><div class="side-dot"></div><div>Manajemen waktu</div></div>
+      </section>
+
+      <!-- PRESTASI -->
+      <section class="section">
+        <div class="section-label">Prestasi</div>
+        <div class="ach">
+          <span class="ach-num">🥇</span>
+          <span>Juara 2 tingkat Kota Yogyakarta 2024</span>
+        </div>
+        <div class="ach">
+          <span class="ach-num">🏆</span>
+          <span>Finalis DIY 2023</span>
+        </div>
+        <div class="ach">
+          <span class="ach-num">📜</span>
+          <span>Sertifikat – Database Design</span>
+        </div>
+      </section>
+
+      <!-- BAHASA -->
+      <section class="section">
+        <div class="section-label">Bahasa</div>
+        <div class="side-item"><div class="side-dot"></div><div>Bahasa Indonesia — Fasih</div></div>
+        <div class="side-item"><div class="side-dot"></div><div>Bahasa Inggris — Dasar (pasif)</div></div>
+      </section>
+
+    </aside>
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>Tersedia untuk PKL: Jan – Jun 2026</span>
+    <span>Dicetak: 2026 · Yogyakarta</span>
+  </footer>
+
+</div><!-- /page -->
+</body>
+</html>
