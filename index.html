@@ -3,17 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CV PKL – Rekayasa Perangkat Lunak</title>
+<title>Nafian Akbar Abimanyu – CV PKL RPL</title>
+<meta name="description" content="CV PKL Nafian Akbar Abimanyu, siswa SMK Rekayasa Perangkat Lunak, Yogyakarta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink:    #0e0e0e;
     --paper:  #f5f2ec;
     --accent: #1a4fff;
-    --muted:  #6b6b6b;
+    --muted:  #5c5c5c;
     --line:   #d4cfc4;
     --tag-bg: #e8e4fb;
     --tag-fg: #3a2fc9;
+    --todo-bg:#fff3c4;
+    --todo-fg:#7a5b00;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,12 +26,16 @@
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
     font-size: 14px;
     line-height: 1.6;
     min-height: 100vh;
     padding: 2rem;
   }
+
+  ul { list-style: none; }
+
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   .page {
     max-width: 860px;
@@ -42,7 +51,7 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── HEADER ─────────────────────────────── */
+  /* ── HEADER ── */
   .header {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -85,11 +94,7 @@
     margin-bottom: .3rem;
   }
 
-  .tagline {
-    font-size: .95rem;
-    color: var(--muted);
-    font-weight: 400;
-  }
+  .tagline { font-size: .95rem; color: var(--muted); }
 
   .contacts {
     display: flex;
@@ -99,7 +104,7 @@
     padding-top: 1rem;
   }
 
-  .contacts a, .contacts span {
+  .contacts > a, .contacts > span {
     font-size: .82rem;
     color: var(--muted);
     text-decoration: none;
@@ -109,7 +114,7 @@
     justify-content: flex-end;
   }
 
-  .contacts a:hover { color: var(--accent); }
+  .contacts > a:hover { color: var(--accent); }
 
   .ico {
     width: 14px; height: 14px;
@@ -120,21 +125,17 @@
     flex-shrink: 0;
   }
 
-  /* ── BODY ────────────────────────────────── */
-  .body {
-    display: grid;
-    grid-template-columns: 1fr 260px;
-  }
-
+  /* ── BODY ── */
+  .body { display: grid; grid-template-columns: 1fr 260px; }
   .main { padding: 2rem 2.4rem; border-right: 1.5px solid var(--line); }
   .side { padding: 2rem 1.8rem; }
 
-  /* ── SECTION ─────────────────────────────── */
   .section { margin-bottom: 2rem; }
 
   .section-label {
     font-family: 'Space Mono', monospace;
     font-size: 10px;
+    font-weight: 700;
     letter-spacing: .14em;
     text-transform: uppercase;
     color: var(--accent);
@@ -144,17 +145,10 @@
     gap: .5rem;
   }
 
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
 
-  /* ── OBJECTIVE ───────────────────────────── */
   .objective {
     font-size: .9rem;
-    color: var(--ink);
     line-height: 1.75;
     padding: 1rem 1.2rem;
     border-left: 3px solid var(--accent);
@@ -162,7 +156,7 @@
     border-radius: 0 4px 4px 0;
   }
 
-  /* ── EXPERIENCE / EDU CARD ───────────────── */
+  /* ── CARD ── */
   .card { margin-bottom: 1.25rem; }
 
   .card-header {
@@ -173,32 +167,14 @@
     gap: .3rem;
   }
 
-  .card-title {
-    font-weight: 600;
-    font-size: .92rem;
-  }
+  .card-title { font-weight: 600; font-size: .92rem; }
+  .card-meta  { font-size: .78rem; color: var(--muted); font-family: 'Space Mono', monospace; }
+  .card-sub   { font-size: .83rem; color: var(--accent); margin-bottom: .4rem; }
 
-  .card-meta {
-    font-size: .78rem;
-    color: var(--muted);
-    font-family: 'Space Mono', monospace;
-  }
-
-  .card-sub {
-    font-size: .83rem;
-    color: var(--accent);
-    margin-bottom: .4rem;
-  }
-
-  .card ul {
-    padding-left: 1.1rem;
-    font-size: .85rem;
-    color: #333;
-  }
-
+  .card ul { padding-left: 1.1rem; font-size: .85rem; color: #333; list-style: disc; }
   .card ul li { margin-bottom: .2rem; }
 
-  /* ── PROJECT CARD ────────────────────────── */
+  /* ── PROJECT ── */
   .proj {
     border: 1px solid var(--line);
     border-radius: 6px;
@@ -207,29 +183,29 @@
     transition: box-shadow .2s, transform .2s;
   }
 
-  .proj:hover {
-    box-shadow: 3px 3px 0 var(--accent);
-    transform: translate(-1px, -1px);
-  }
+  .proj:hover { box-shadow: 3px 3px 0 var(--accent); transform: translate(-1px, -1px); }
 
-  .proj-title {
+  .proj-title { font-weight: 600; font-size: .9rem; margin-bottom: .3rem; }
+  .proj-desc  { font-size: .82rem; color: var(--muted); margin-bottom: .5rem; }
+
+  .proj-links { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .7rem; }
+
+  .btn-project {
+    display: inline-block;
+    font-size: .78rem;
     font-weight: 600;
-    font-size: .9rem;
-    margin-bottom: .3rem;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1.5px solid var(--accent);
+    padding: 3px 12px;
+    border-radius: 4px;
+    transition: background .2s, color .2s;
   }
 
-  .proj-desc {
-    font-size: .82rem;
-    color: var(--muted);
-    margin-bottom: .5rem;
-  }
+  .btn-project:hover { background: var(--accent); color: #fff; }
 
-  /* ── TAGS ────────────────────────────────── */
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .3rem;
-  }
+  /* ── TAGS ── */
+  .tags { display: flex; flex-wrap: wrap; gap: .3rem; }
 
   .tag {
     font-size: .72rem;
@@ -241,29 +217,18 @@
     letter-spacing: .04em;
   }
 
-  .tag.dark {
-    background: var(--ink);
-    color: #fff;
-  }
+  .tag.dark { background: var(--ink); color: #fff; }
 
-  /* ── SKILL BARS ──────────────────────────── */
+  /* Penanda bagian yang HARUS kamu isi. Hapus class ini setelah diisi. */
+  .todo { background: var(--todo-bg); color: var(--todo-fg); padding: 0 4px; border-radius: 2px; }
+
+  /* ── SKILLS ── */
   .skill-item { margin-bottom: .85rem; }
 
-  .skill-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: .83rem;
-    margin-bottom: .3rem;
-  }
+  .skill-row { display: flex; justify-content: space-between; font-size: .83rem; margin-bottom: .3rem; }
+  .skill-lvl { color: var(--muted); font-size: .72rem; font-family: 'Space Mono', monospace; }
 
-  .skill-pct { color: var(--muted); font-size: .75rem; font-family: 'Space Mono', monospace; }
-
-  .bar-track {
-    height: 4px;
-    background: var(--line);
-    border-radius: 2px;
-    overflow: hidden;
-  }
+  .bar-track { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
 
   .bar-fill {
     height: 100%;
@@ -273,12 +238,14 @@
     animation: barGrow .8s cubic-bezier(.22,1,.36,1) both;
   }
 
-  @keyframes barGrow {
-    from { transform: scaleX(0); }
-    to   { transform: scaleX(1); }
-  }
+  /* Level: Mahir 85%, Menengah 60%, Dasar 35% */
+  .lvl-3 { width: 85%; }
+  .lvl-2 { width: 60%; }
+  .lvl-1 { width: 35%; }
 
-  /* ── SIDE ITEMS ──────────────────────────── */
+  @keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  /* ── SIDE ITEMS ── */
   .side-item {
     display: flex;
     align-items: flex-start;
@@ -291,258 +258,255 @@
     width: 7px; height: 7px;
     border-radius: 50%;
     background: var(--accent);
-    margin-top: 6px;
+    margin-top: 7px;
     flex-shrink: 0;
   }
 
-  /* ── ACHIEVEMENT ─────────────────────────── */
-  .ach {
-    display: flex;
-    align-items: flex-start;
-    gap: .6rem;
-    margin-bottom: .7rem;
-    font-size: .85rem;
-  }
+  .ach { margin-bottom: .8rem; font-size: .85rem; }
+  .ach strong { display: block; font-weight: 600; }
+  .ach span { color: var(--muted); font-size: .8rem; }
 
-  .ach-num {
-    font-family: 'Space Mono', monospace;
-    font-size: .75rem;
-    background: var(--accent);
-    color: #fff;
-    padding: 1px 6px;
-    border-radius: 2px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  /* ── FOOTER ──────────────────────────────── */
+  /* ── FOOTER ── */
   .footer {
     border-top: 1.5px solid var(--line);
     padding: .9rem 2.4rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: .4rem;
     font-size: .75rem;
     color: var(--muted);
     font-family: 'Space Mono', monospace;
   }
 
-  /* ── PRINT ───────────────────────────────── */
+  /* ── PRINT ── */
+  @page { size: A4; margin: 10mm; }
+
   @media print {
-    body { padding: 0; background: #fff; }
-    .page { box-shadow: none; border: none; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { padding: 0; background: #fff; font-size: 12px; }
+    .page { box-shadow: none; border: none; animation: none; }
+    .bar-fill { animation: none; }
+    .proj, .card, .ach { break-inside: avoid; }
     .proj:hover { box-shadow: none; transform: none; }
+    .header { padding: 1.4rem 2rem 1.2rem; }
+    .main { padding: 1.4rem 1.8rem; }
+    .side { padding: 1.4rem 1.4rem; }
+    .section { margin-bottom: 1.2rem; }
   }
 
   @media (max-width: 640px) {
+    body { padding: 1rem; }
     .body { grid-template-columns: 1fr; }
-    .main { border-right: none; border-bottom: 1.5px solid var(--line); }
+    .main { border-right: none; border-bottom: 1.5px solid var(--line); padding: 1.5rem 1.4rem; }
+    .side { padding: 1.5rem 1.4rem; }
+    .header { grid-template-columns: 1fr; padding: 1.8rem 1.4rem 1.5rem; }
     h1 { font-size: 1.8rem; }
-    .header { grid-template-columns: 1fr; }
     .contacts { text-align: left; }
-    .contacts a, .contacts span { justify-content: flex-start; }
+    .contacts > a, .contacts > span { justify-content: flex-start; }
+    .footer { padding: .9rem 1.4rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
   }
 </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- HEADER -->
   <header class="header">
     <div>
-      <span class="badge">CV PKL · 2025</span>
+      <span class="badge">CV PKL</span>
       <h1>Nafian Akbar Abimanyu</h1>
-      <p class="tagline">Siswa SMK · Rekayasa Perangkat Lunak · Kelas XI</p>
+      <p class="tagline">Siswa SMK Rekayasa Perangkat Lunak, Kelas <span class="todo">[XI/XII]</span></p>
     </div>
     <div class="contacts">
-      <span><span class="ico">📍</span> Yogyakarta, Indonesia</span>
-      <a href="tel:+6282286080440"><span class="ico">📞</span> +62 822-8608-0440</a>
-      <a href="mailto:arkafian28@email.com"><span class="ico">✉</span> Arkafian28@email.com</a>
-      <a href="https://github.com/nafianakbar" target="_blank"><span class="ico">⌥</span> https://github.com/nafianakbar</a>
+      <span><span class="ico" aria-hidden="true">📍</span> Yogyakarta, Indonesia</span>
+      <a href="tel:+6282286080440"><span class="ico" aria-hidden="true">📞</span> +62 822-8608-0440</a>
+      <a href="mailto:arkafian28@email.com"><span class="ico" aria-hidden="true">✉</span> <span class="todo">arkafian28@email.com</span></a>
+      <a href="https://github.com/nafianakbar" target="_blank" rel="noopener noreferrer"><span class="ico" aria-hidden="true">⌥</span> github.com/nafianakbar</a>
     </div>
   </header>
 
-  <!-- BODY -->
   <div class="body">
 
-    <!-- MAIN COLUMN -->
     <main class="main">
 
-      <!-- TUJUAN -->
-      <section class="section">
-        <div class="section-label">Tujuan PKL</div>
+      <section class="section" aria-labelledby="tujuan">
+        <h2 class="section-label" id="tujuan">Tujuan PKL</h2>
         <p class="objective">
-          Siswa SMK kelas XI jurusan Rekayasa Perangkat Lunak dengan semangat belajar tinggi dan
-          pengalaman membangun proyek nyata. Ingin berkontribusi pada tim profesional selama PKL
-          untuk mengasah skill <em>web development</em> dan pemrograman berbasis industri.
+          Siswa SMK RPL yang fokus pada <em>web development</em> (PHP dan JavaScript).
+          Telah membangun beberapa proyek mandiri dan mencari PKL untuk belajar alur kerja tim,
+          version control, dan deployment di industri. Tersedia mulai
+          <span class="todo">[bulan tahun]</span>.
         </p>
       </section>
 
-      <!-- PROYEK -->
-      <section class="section">
-        <div class="section-label">Proyek Unggulan</div>
+      <section class="section" aria-labelledby="proyek">
+        <h2 class="section-label" id="proyek">Proyek Unggulan</h2>
 
-       <div class="proj">
-  <div class="proj-title">Tomouse jo</div>
-  <div class="proj-desc">
-    Web Jual Beli Mouse 
-  </div>
-
-  <div class="tags">
-    <span class="tag">PHP</span>
-    <span class="tag">MySQL</span>
-    <span class="tag">Infinityfree</span>
-    <span class="tag">CRUD</span>
-  </div>
-
-  <br>
-
-  <a href="https://ecommers.infinityfreeapp.com/tabelb/index.php" target="_blank" class="btn-project">
-    🌐 Lihat Website
-  </a>
-</div>
-
-        <div class="proj">
-          <div class="proj-title">Game Catur 3D</div>
-          <div class="proj-desc">Game Catur 3d yang hd siap dimainkan melawan AI.</div>
+        <article class="proj">
+          <h3 class="proj-title">Tomouse – Toko Online Mouse</h3>
+          <p class="proj-desc">
+            Website jual beli mouse dengan katalog produk dan panel admin untuk mengelola data
+            (tambah, lihat, ubah, hapus). <span class="todo">[Tambahkan fitur lain yang benar-benar ada, mis. keranjang, login]</span>
+          </p>
           <div class="tags">
-            <span class="tag">Laravel</span>
-            <span class="tag">Tailwind CSS</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">REST API</span>
+            <span class="tag">PHP</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">CRUD</span>
           </div>
-        </div>
+          <div class="proj-links">
+            <a href="https://ecommers.infinityfreeapp.com/tabelb/index.php" target="_blank" rel="noopener noreferrer" class="btn-project">Lihat demo</a>
+            <a href="https://github.com/nafianakbar/NAMA-REPO" target="_blank" rel="noopener noreferrer" class="btn-project">Kode di GitHub</a>
+          </div>
+        </article>
 
-        <div class="proj">
-          <div class="proj-title">Aplikasi Absensi Berbasis Android Studio</div>
-          <div class="proj-desc">Aplikasi monitoring nilai dengan grafik interaktif. Guru dapat input nilai, siswa bisa melihat rekap real-time.</div>
+        <article class="proj">
+          <h3 class="proj-title">Game Catur 3D</h3>
+          <p class="proj-desc">
+            Game catur 3D yang bisa dimainkan melawan komputer (AI).
+            <span class="todo">[Sebutkan fitur utama: tingkat kesulitan, aturan lengkap, dll.]</span>
+          </p>
           <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">Flask</span>
-            <span class="tag">Chart.js</span>
-            <span class="tag">SQLite</span>
+            <span class="tag todo">[Teknologi asli, mis. JavaScript, Three.js]</span>
           </div>
-        </div>
+          <div class="proj-links">
+            <a href="https://github.com/nafianakbar/NAMA-REPO" target="_blank" rel="noopener noreferrer" class="btn-project">Kode di GitHub</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <h3 class="proj-title">Aplikasi Absensi Android</h3>
+          <p class="proj-desc">
+            Aplikasi absensi berbasis Android. <span class="todo">[Jelaskan fungsinya: siapa penggunanya, apa yang dicatat, apakah ada rekap]</span>
+          </p>
+          <div class="tags">
+            <span class="tag todo">[Teknologi asli, mis. Kotlin/Java, SQLite]</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/nafianakbar/NAMA-REPO" target="_blank" rel="noopener noreferrer" class="btn-project">Kode di GitHub</a>
+          </div>
+        </article>
       </section>
 
-      <!-- PENDIDIKAN -->
-      <section class="section">
-        <div class="section-label">Pendidikan</div>
+      <section class="section" aria-labelledby="pendidikan">
+        <h2 class="section-label" id="pendidikan">Pendidikan</h2>
 
         <div class="card">
           <div class="card-header">
-            <span class="card-title">SMK Negeri 1 Sanden</span>
+            <h3 class="card-title">SMK Negeri 1 Sanden</h3>
             <span class="card-meta">2024 – Sekarang</span>
           </div>
-          <div class="card-sub">Rekayasa Perangkat Lunak · Kelas XI</div>
+          <div class="card-sub">Rekayasa Perangkat Lunak</div>
           <ul>
-            <li>Rata-rata nilai rapor: <strong>87.4</strong> / 100</li>
-            <li>Ketua kelompok PKK (Praktik Kerja Kejuruan) angkatan 2024</li>
-            <li>Aktif dalam ekstrakurikuler Programming Club</li>
+            <li>Rata-rata nilai rapor: <strong>87,4</strong> / 100</li>
+            <li>Ketua kelompok praktik kejuruan angkatan 2024</li>
+            <li>Aktif di ekstrakurikuler Programming Club</li>
           </ul>
         </div>
 
         <div class="card">
           <div class="card-header">
-            <span class="card-title">SMP Negeri 7 Tanjung Pinang</span>
+            <h3 class="card-title">SMP Negeri 7 Tanjung Pinang</h3>
             <span class="card-meta">2021 – 2024</span>
           </div>
-          <div class="card-sub">Lulus dengan predikat baik</div>
         </div>
       </section>
 
     </main>
 
-    <!-- SIDE COLUMN -->
     <aside class="side">
 
-      <!-- SKILLS -->
-      <section class="section">
-        <div class="section-label">Keahlian Teknis</div>
-
-        <div class="skill-item">
-          <div class="skill-row"><span>HTML & CSS</span><span class="skill-pct">90%</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:90%; animation-delay:.1s"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-row"><span>PHP / Laravel</span><span class="skill-pct">85%</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:75%; animation-delay:.2s"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-row"><span>JavaScript</span><span class="skill-pct">70%</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:70%; animation-delay:.3s"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-row"><span>Python</span><span class="skill-pct">65%</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:65%; animation-delay:.4s"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-row"><span>MySQL / Database</span><span class="skill-pct">72%</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:72%; animation-delay:.5s"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-row"><span>Git & GitHub</span><span class="skill-pct">68%</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:68%; animation-delay:.6s"></div></div>
-        </div>
+      <section class="section" aria-labelledby="skill">
+        <h2 class="section-label" id="skill">Keahlian</h2>
+        <ul>
+          <li class="skill-item">
+            <div class="skill-row"><span>HTML &amp; CSS</span><span class="skill-lvl">Mahir</span></div>
+            <div class="bar-track"><div class="bar-fill lvl-3" style="animation-delay:.1s"></div></div>
+          </li>
+          <li class="skill-item">
+            <div class="skill-row"><span>PHP</span><span class="skill-lvl">Menengah</span></div>
+            <div class="bar-track"><div class="bar-fill lvl-2" style="animation-delay:.2s"></div></div>
+          </li>
+          <li class="skill-item">
+            <div class="skill-row"><span>JavaScript</span><span class="skill-lvl">Menengah</span></div>
+            <div class="bar-track"><div class="bar-fill lvl-2" style="animation-delay:.3s"></div></div>
+          </li>
+          <li class="skill-item">
+            <div class="skill-row"><span>MySQL</span><span class="skill-lvl">Menengah</span></div>
+            <div class="bar-track"><div class="bar-fill lvl-2" style="animation-delay:.4s"></div></div>
+          </li>
+          <li class="skill-item">
+            <div class="skill-row"><span>Git &amp; GitHub</span><span class="skill-lvl">Menengah</span></div>
+            <div class="bar-track"><div class="bar-fill lvl-2" style="animation-delay:.5s"></div></div>
+          </li>
+          <li class="skill-item">
+            <div class="skill-row"><span>Laravel</span><span class="skill-lvl">Dasar</span></div>
+            <div class="bar-track"><div class="bar-fill lvl-1" style="animation-delay:.6s"></div></div>
+          </li>
+          <li class="skill-item">
+            <div class="skill-row"><span>Python</span><span class="skill-lvl">Dasar</span></div>
+            <div class="bar-track"><div class="bar-fill lvl-1" style="animation-delay:.7s"></div></div>
+          </li>
+        </ul>
       </section>
 
-      <!-- TOOLS -->
-      <section class="section">
-        <div class="section-label">Tools</div>
-        <div class="tags" style="gap:.4rem">
-          <span class="tag dark">VS Code</span>
-          <span class="tag dark">Git</span>
-          <span class="tag dark">Figma</span>
-          <span class="tag dark">Postman</span>
-          <span class="tag dark">XAMPP</span>
-          <span class="tag dark">Linux</span>
-          <span class="tag dark">Docker</span>
-        </div>
+      <section class="section" aria-labelledby="tools">
+        <h2 class="section-label" id="tools">Tools</h2>
+        <ul class="tags" style="gap:.4rem">
+          <li class="tag dark">VS Code</li>
+          <li class="tag dark">Git</li>
+          <li class="tag dark">Figma</li>
+          <li class="tag dark">Postman</li>
+          <li class="tag dark">XAMPP</li>
+        </ul>
       </section>
 
-      <!-- SOFT SKILLS -->
-      <section class="section">
-        <div class="section-label">Soft Skills</div>
-        <div class="side-item"><div class="side-dot"></div><div>Kerja tim & kolaborasi</div></div>
-        <div class="side-item"><div class="side-dot"></div><div>Cepat belajar hal baru</div></div>
-        <div class="side-item"><div class="side-dot"></div><div>Problem solving & debugging</div></div>
-        <div class="side-item"><div class="side-dot"></div><div>Komunikasi yang baik</div></div>
-        <div class="side-item"><div class="side-dot"></div><div>Manajemen waktu</div></div>
+      <section class="section" aria-labelledby="soft">
+        <h2 class="section-label" id="soft">Soft Skills</h2>
+        <ul>
+          <li class="side-item"><span class="side-dot" aria-hidden="true"></span><span>Kerja tim dan kolaborasi</span></li>
+          <li class="side-item"><span class="side-dot" aria-hidden="true"></span><span>Cepat belajar hal baru</span></li>
+          <li class="side-item"><span class="side-dot" aria-hidden="true"></span><span>Problem solving dan debugging</span></li>
+          <li class="side-item"><span class="side-dot" aria-hidden="true"></span><span>Manajemen waktu</span></li>
+        </ul>
       </section>
 
-      <!-- PRESTASI -->
-      <section class="section">
-        <div class="section-label">Prestasi</div>
+      <section class="section" aria-labelledby="prestasi">
+        <h2 class="section-label" id="prestasi">Prestasi</h2>
         <div class="ach">
-          <span class="ach-num">🥇</span>
-          <span>Juara 2 tingkat Kota Yogyakarta 2024</span>
-        </div>
-        <div class="ach">
-          <span class="ach-num">🏆</span>
-          <span>Finalis DIY 2023</span>
+          <strong>Juara 2 <span class="todo">[nama lomba]</span></strong>
+          <span><span class="todo">[Penyelenggara, tingkat]</span>, 2024</span>
         </div>
         <div class="ach">
-          <span class="ach-num">📜</span>
-          <span>Sertifikat – Database Design</span>
+          <strong>Finalis <span class="todo">[nama lomba]</span></strong>
+          <span><span class="todo">[Penyelenggara, tingkat]</span>, 2023</span>
+        </div>
+        <div class="ach">
+          <strong>Sertifikat Database Design</strong>
+          <span><span class="todo">[Penerbit, mis. Dicoding/Cisco/BNSP]</span></span>
         </div>
       </section>
 
-      <!-- BAHASA -->
-      <section class="section">
-        <div class="section-label">Bahasa</div>
-        <div class="side-item"><div class="side-dot"></div><div>Bahasa Indonesia — Fasih</div></div>
-        <div class="side-item"><div class="side-dot"></div><div>Bahasa Inggris — Dasar (pasif)</div></div>
+      <section class="section" aria-labelledby="bahasa">
+        <h2 class="section-label" id="bahasa">Bahasa</h2>
+        <ul>
+          <li class="side-item"><span class="side-dot" aria-hidden="true"></span><span>Indonesia: fasih</span></li>
+          <li class="side-item"><span class="side-dot" aria-hidden="true"></span><span>Inggris: dasar (membaca dokumentasi teknis)</span></li>
+        </ul>
       </section>
 
     </aside>
-  </div><!-- /body -->
+  </div>
 
-  <!-- FOOTER -->
   <footer class="footer">
-    <span>Tersedia untuk PKL: Jan – Jun 2026</span>
-    <span>Dicetak: 2026 · Yogyakarta</span>
+    <span>Tersedia untuk PKL: <span class="todo">[bulan tahun – bulan tahun]</span></span>
+    <span>Yogyakarta</span>
   </footer>
 
-</div><!-- /page -->
+</div>
 </body>
 </html>
