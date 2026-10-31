@@ -337,9 +337,22 @@
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
   }
+
+  /* ── TOMBOL DOWNLOAD PDF (tambahan, tidak ikut tercetak) ── */
+  .toolbar { max-width: 860px; margin: 0 auto .8rem; display: flex; justify-content: flex-end; align-items: center; gap: .8rem; }
+  .toolbar small { color: var(--muted); }
+  .btn-pdf { font: inherit; font-weight: 600; cursor: pointer; background: var(--accent); color: #fff; border: 0; border-radius: 6px; padding: .5rem 1rem; }
+  .btn-pdf:hover { background: #123ccc; }
+  .btn-pdf:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  @media print { .toolbar { display: none; } }
 </style>
 </head>
 <body>
+<div class="toolbar">
+  <small>Di jendela yang muncul, pilih "Save as PDF" / "Simpan sebagai PDF".</small>
+  <button type="button" class="btn-pdf" id="btnPdf">Download PDF</button>
+</div>
+
 <div class="page">
 
   <header class="header">
@@ -460,8 +473,8 @@ Toko online mouse gaming: katalog dan pencarian, login admin/member, kelola prod
         <h2 class="section-label" id="skill">Keahlian</h2>
         <ul>
           <li class="skill-item">
-            <div class="skill-row"><span>HTML &amp; CSS</span><span class="skill-lvl">Mahir</span></div>
-            <div class="bar-track"><div class="bar-fill lvl-3" style="animation-delay:.1s"></div></div>
+            <div class="skill-row"><span>HTML &amp; CSS</span><span class="skill-lvl">Menengah</span></div>
+            <div class="bar-track"><div class="bar-fill lvl-2" style="animation-delay:.1s"></div></div>
           </li>
           <li class="skill-item">
             <div class="skill-row"><span>PHP</span><span class="skill-lvl">Menengah</span></div>
@@ -528,5 +541,14 @@ Toko online mouse gaming: katalog dan pencarian, login admin/member, kelola prod
   </footer>
 
 </div>
+
+<script>
+  // Tambahan: tombol Download PDF. Nama file PDF mengikuti judul halaman saat dicetak.
+  var judulAsli = document.title;
+  var namaPdf = 'CV_PKL_Nafian_Akbar_Abimanyu';
+  document.getElementById('btnPdf').addEventListener('click', function () { window.print(); });
+  window.addEventListener('beforeprint', function () { document.title = namaPdf; });
+  window.addEventListener('afterprint',  function () { document.title = judulAsli; });
+</script>
 </body>
 </html>
